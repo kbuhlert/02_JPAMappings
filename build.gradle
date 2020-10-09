@@ -10,5 +10,11 @@ repositories {
 }
 
 dependencies {
+    compile group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'   //Wir brauchen dann noch einen Gradle-Source-Set: Im Main-Folder liegen Java und Resources-Folder,
+    // im Resources muss mit new->Directory ein neuer Ordner angelegt werden mit Namen META-INF.
+    // Dort wird von Gradle die persistance.xml-File angelegt. JPA hat den Filenamen persistance.xml als convention.
+    // Diese File muss auch angelegt qwerden
+    compile group: 'org.eclipse.persistence', name: 'eclipselink', version: '2.7.7'
+    compile group: 'org.apache.derby', name: 'derby', version: '10.14.2.0'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
