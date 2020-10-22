@@ -3,10 +3,12 @@ package at.campus02.dbp2.jpa;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity //Annotation, dass diese Klasse als Entität gemappt werden soll
+@NamedQuery(name = "Student.findAllByGender", query = "select s from  Student s where s.gender = :gender")
 public class Student {
         // automatisch generierte technische ID, PrimaryKey
 
