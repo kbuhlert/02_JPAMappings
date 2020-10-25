@@ -26,8 +26,8 @@ public class StudentDAOSpec {
     //Strukturierung der tests in 3 Blöckke given(Vorraussetzungen die gebraucht werden um Test durchzuführen,
     // when (was getestet werden soll), then (überprüfen ob funktioniert)
     private EntityManager manager;
-    private EntityManagerFactory factory;
-    private StudentDAO dao;
+    private EntityManagerFactory factory;   //bruchen wir um entities zu machen
+    private StudentDAO dao; //wollen wir prüfen
 
 
     // <editor-fold desc="Hilfsfunktionen">
@@ -49,9 +49,9 @@ public class StudentDAOSpec {
     }
     // <editor-fold desc=Hilfsfunktionen>
 
-    @Before
+    @Before     //alle Dinge die für man den Test braucht werden hier vorbereitet
     public void setUp(){
-        factory = Persistence.createEntityManagerFactory("nameOfJpaPersistenceUnit");
+        factory = Persistence.createEntityManagerFactory("nameOfJpaPersistenceUnit");   //Wichtig: Name der in der persistance.xml steht
         manager = factory.createEntityManager();
         dao = new StudentDAOImpl(factory);
     }
@@ -75,7 +75,7 @@ public class StudentDAOSpec {
         String result = str1.toUpperCase();
 
         //then
-        Assert.assertThat(result, is("STRING"));
+        Assert.assertThat(result, is("STRING"));    //annotation (aasert that) kommt von Hamcrest-Matchern
     }
 
     @Test
@@ -233,7 +233,7 @@ public class StudentDAOSpec {
         dao.delete(prepareStudent("firstname", "lastname", Gender.FEMALE, "22.09.1978"));
     }
 
-    @Test
+    @Test   //Test laufen immer gleich ab: Studenten erzeugen, die abfragen, die ich haben will und ob ich alle bekomme, das wars
     public void findAllReturnsAllEntitiesFromDatabase(){
         //given
         Student student1 = prepareStudent("firstname1", "lastname1", Gender.FEMALE, "22.09.1978");
@@ -391,7 +391,7 @@ public class StudentDAOSpec {
 
     }
 
-    @After
+    @After      //alles was nach dem Test gemacht werden soll
     public void tearDown(){
         //Die close-Methode soll am Ende jedes Tests aufgerufen werden
         // und sicherstellen, dass die verwendeten Ressourcen (EntityManager) aufgeräumt werden.

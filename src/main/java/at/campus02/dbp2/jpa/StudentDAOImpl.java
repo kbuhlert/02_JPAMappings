@@ -25,7 +25,7 @@ public class StudentDAOImpl implements StudentDAO {
 
         if ((student.getId()) != null){
                 return false;
-            }
+            }           //-> Überprüfung der Randfälle
 
         manager.getTransaction().begin();
         manager.persist(student);   //persist = in Datenbank eintragen
@@ -66,13 +66,13 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public List<Student> findAll() {
-        String querystring = "SELECT s FROM Student s";
-        TypedQuery<Student> query = manager.createQuery(querystring, Student.class);
+        String querystring = "SELECT s FROM Student s"; //typed query vom Typ student, erzeugt mit Querystring
+        TypedQuery<Student> query = manager.createQuery(querystring, Student.class);    //wir müssen sagen welche Klasse wir zurück haben möchten
         return query.getResultList();
     }
 
     @Override
-    public List<Student> findAllByLastname(String lastname) {
+    public List<Student> findAllByLastname(String lastname) {   //brauchen Query mit Parameter (lastname), wir verwenden named Parameter (:Variablenname)
         if (lastname == null)
             return findAll();
         String querystring = "SELECT s FROM Student s WHERE upper(s.lastName) = upper(:lastname)";   //mach mit upper aus allen Studenten Studenten mit Großbuchstaben ->Vergleichbarkeit der Einträge
